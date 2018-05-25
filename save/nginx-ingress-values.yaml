@@ -1,0 +1,35 @@
+rbac:
+  create: "true"
+controller: 
+  image:
+    repository: quay.io/kubernetes-ingress-controller/nginx-ingress-controller
+    tag: "0.11.0"
+    pullPolicy: IfNotPresent
+  daemonset:
+    useHostPort: false
+  name: controller
+  kind: DaemonSet
+  hostNetwork: true
+  extraArgs:
+    enable-ssl-passthrough: true
+    annotations-prefix: "ingress.kubernetes.io"
+  config:
+    proxy-body-size: "0"
+    server-name-hash-bucket-size: "64"
+    server-name-hash-max-size: "1024"
+    use-http2: "true"
+    proxy-buffering: "off"
+    log-format: '{ "@timestamp": "$time_iso8601", "@version": "1", "clientip": "$remote_addr", "tag": "ingress", "remote_user": "$remote_user", "bytes": $bytes_sent, "duration": $request_time, "status": $status, "request": "$request_uri", "urlpath": "$uri", "urlquery": "$args", "method": "$request_method", "referer": "$http_referer", "useragent": "$http_user_agent", "software": "nginx", "version": "$nginx_version", "host": "$host", "upstream": "$upstream_addr", "upstream-status": "$upstream_status" }'
+    hsts-max-age: "31536000"
+    ssl-protocols: "TLSv1.2"
+    ssl-prefer-server-ciphers: "True"
+    ssl-ciphers: "HIGH:!aNULL:!MD5"
+    server-tokens: "False"
+    main-snippets: 'load_module "modules/ngx_stream_module.so"'
+    worker-processes: "1"
+    worker-rlimit-nofile: "65536"
+    worker-connections: "10240"
+    worker-cpu-affinity: "auto"
+    worker-shutdown-timeout: "5m"
+    keepalive: "32"
+
