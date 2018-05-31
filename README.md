@@ -609,7 +609,7 @@ Here is an example with the different files in the cert:/// directory of an idg 
 
 These crypto files have been created on your Ubuntu VM, in the **$HOME/save/myApic/common-generated-certs** and **$HOME/save/myApic/gw-generated-certs** directories.
 
-You can now connect to your idg using ssh and enter the following commands that will create the DataPower DataPower gateway service that we can use later:
+You can now connect to your idg using ssh and enter the following commands that will create the DataPower gateway service that we can use later:
 
 ```console
 idg$ top; co;
