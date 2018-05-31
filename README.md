@@ -105,12 +105,25 @@ ubuntu$ sudo swapoff -a
 ```
 K8s won't run with swap enabled. **swapoff -a** is the Ubuntu command for disabling it.
 
+### Important
+The 2 previous commands only work when the system is online.
+If it is rebooted then these settings are lost and have to be re-run before k8s will start or apiconnect pods will come up.
+These commands can be turned on permanently:
+* by editing **/etc/fstab** and commenting out the SWAP line; here is a command you can use to perform this action:
+```console
+ubuntu$ sudo sed -i '/ swap / s/^/#/' /etc/fstab
+```
+
+* by editing **/etc/sysctl.conf** and adding **vm.max_map_count=262144** to the end of the file, as shown on the following picture:
+
+<img src="img/sysctl-conf.png">
+
 ## Docker & Kubernetes (k8s)
 The version of Docker and k8s used to perform the apiconnect v2018 installation are:
 * Docker: version 1.13.1 (client + server)
 * k8s: version 1.10.0 (client) + 1.10.3 (server)
 
-Here is a very good article about the installation of Docker and k8s. It presents the creation of a k8s cluster with master and worker nodes.
+[Here](https://www.techrepublic.com/article/how-to-quickly-install-kubernetes-on-ubuntu/) is a very good article about the installation of Docker and k8s. It presents the creation of a k8s cluster with master and worker nodes.
 In our case, **we only install a single master node**.
 
 If do not want to read the, here are the commands you need to execute to first install dependencies and Docker:
@@ -215,6 +228,8 @@ ubuntu$ kubectl taint nodes --all node-role.kubernetes.io/master-
 
 Just a few remarks:
 
+You can add the **export KUBECONFIG=$HOME/.kube/config** command used to set the environment variable to your shell configuration file, e.g. **$HOME/.bashrc** or more globally in **/etc/environment** (using **sudo vi /etc/environment**)
+
 The first command (**kubeadm init**) may take time to execute. During its execution, you should see some outputs similar to these ones:
 
 <img src="img/kubeadm-init-start.png">
@@ -316,9 +331,10 @@ Create a directory to store your htpasswd file, create the credentials, then rem
 
 ```console
 ubuntu$ mkdir /opt/registry/auth
+ubuntu$ mkdir /opt/registry/data
 ubuntu$ sudo docker run --entrypoint htpasswd registry:2 -Bbn admin <insert-password> >> /opt/registry/auth/htpasswd
 ubuntu$ sudo docker ps
-ubuntu$ sudo docker stop <id> && docker rm <id>
+ubuntu$ sudo docker stop <id> && sudo docker rm <id>
 ```
 
 At this step, you have created an **htpasswd** file that contains your credentials (login + hashed password).
@@ -531,7 +547,7 @@ ubuntu$ apicup endpoints set portal portal-admin padmin.<externalIPAddress>.xip.
 ubuntu$ apicup endpoints set portal portal-www  portal.<externalIPAddress>.xip.io
 
 ubuntu$ apicup subsys set portal registry localhost:5000
-ubuntu$  set portal registry-secret my-localreg-secret
+ubuntu$ apicup subsys set portal registry-secret my-localreg-secret
 
 ubuntu$ apicup subsys set portal mode demo
 ubuntu$ apicup subsys set portal namespace $NAMESPACE
@@ -839,6 +855,7 @@ In this appendix, I want to provide some useful links regarding apiconnect v2018
 * [How To Install Java with Apt-Get on Ubuntu 16.04](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-get-on-ubuntu-16-04)
 * [Helm](https://docs.helm.sh/)
 * [How to quickly install Kubernetes on Ubuntu](https://www.techrepublic.com/article/how-to-quickly-install-kubernetes-on-ubuntu/)
+* ... and for children: [The Children's Illustrated Guide to Kubernetes](https://deis.com/blog/2016/kubernetes-illustrated-guide/)
 
 
 ---
