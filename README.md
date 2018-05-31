@@ -6,10 +6,14 @@
 ---
 # Install apiconnect v2018 on Ubuntu / Kubernetes
 
-<img src="img/docker.png" width="200" height="180">
-<img src="img/k8.png" width="200" height="200">
-<img src="img/apic.png" width="300" height="200">
-<img src="img/ubuntu.png" width="180" height="180">
+<table border="0">
+<tr>
+<td><img src="img/docker.png" width="200" height="180"></td>
+<td><img src="img/k8.png" width="200" height="200"></td>
+<td><img src="img/apic.png" width="300" height="200"></td>
+<td><img src="img/ubuntu.png" width="180" height="180"></td>
+</tr>
+</table>
 
 ## Goal of this material
 Since March 2018, a new version of IBM API Connect (apiconnect) has been released on the market.
