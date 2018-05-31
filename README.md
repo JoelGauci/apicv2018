@@ -856,6 +856,8 @@ In this appendix, I want to provide some useful links regarding apiconnect v2018
 
 
 ---
+<img src="img/containers-footer.jpeg" width="700" height="385">
+
 <div style="background-color:#5A0F1B;color:white; vertical-align: middle; text-align:center;font-size:190%; padding:10px; margin-top:100px">
  Installing IBM API Connect v2018
 </div>
