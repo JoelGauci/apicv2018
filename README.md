@@ -631,7 +631,7 @@ idg$ valcred gateway-director-valcred; certificate root-ca; exit;
 idg$ ssl-client gwd_client; reset; protocols TLSv1d2; idcred gateway-director-idcred; valcred gateway-director-valcred; exit;
 idg$ ssl-server gwd_server; reset; protocols TLSv1d2; idcred gateway-director-idcred; valcred gateway-director-valcred; exit;
 idg$ exit;
-idg$ gateway-peering gwd_peering; no enable-ssl; local-address <api-gateway-ip-address>; persistence memory; exit;
+idg$ gateway-peering gwd_peering; local-address <api-gateway-ip-address>; local-port 16380; monitor-port 26380; no enable-peer-group ; priority 100; no enable-ssl ; persistence memory ;local-directory local:///;
 idg$ apic-gw-service; ssl-client gwd_client; ssl-server gwd_server; gateway-peering gwd_peering; admin-state enabled; exit;
 idg$ write mem;
 ```
