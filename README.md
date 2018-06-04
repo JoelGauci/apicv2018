@@ -125,7 +125,7 @@ In our case, **we only install a single master node**.
 
 If do not want to read the, here are the commands you need to execute to first install dependencies and Docker:
 ```console
-ubuntu$ sudo apt-get update && apt-get install -y apt-transport-https
+ubuntu$ sudo apt-get update && sudo apt-get install -y apt-transport-https
 ubuntu$ sudo apt install docker.io
 ```
 
