@@ -610,6 +610,7 @@ You can now connect to your idg using ssh and enter the following commands that 
 
 ```console
 idg$ top; co;
+idg$ xml-mgmt 0.0.0.0 5550;
 idg$ switch domain apiconnect;
 [apiconnect]
 idg$ top; co;
@@ -636,7 +637,7 @@ idg$ apic-gw-service; ssl-client gwd_client; ssl-server gwd_server; gateway-peer
 idg$ write mem;
 ```
 
-These commands will create an API Connect Gateway Service on the **apiconnect** domain, as shown here:
+These commands will activate the IDG XML Management interface and create an API Connect Gateway Service on the **apiconnect** domain, as shown here:
 
 <img src="img/apic-gw-service.png">
 
