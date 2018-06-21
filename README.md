@@ -60,6 +60,8 @@ Install apiconnect v2018 on Ubuntu / Kubernetes
 
     Appendix A. Resources
 
+    Appendix B. API Connect versions
+
 
 # 1. Pre-requisites
 
@@ -635,6 +637,7 @@ idg$ exit;
 idg$ gateway-peering gwd_peering; local-address <api-gateway-ip-address>; local-port 16380; monitor-port 26380; no enable-peer-group ; priority 100; no enable-ssl ; persistence memory ;local-directory local:///;
 idg$ apic-gw-service; ssl-client gwd_client; ssl-server gwd_server; gateway-peering gwd_peering; admin-state enabled; exit;
 idg$ write mem;
+[y]
 ```
 
 These commands will activate the IDG XML Management interface and create an API Connect Gateway Service on the **apiconnect** domain, as shown here:
@@ -838,7 +841,7 @@ You can access the different components of the solution and sart creating API pr
 These products can be published on a developer portal, accessible to your partners.
 Congratulations!
 
-# Appendix A.
+# Appendix A. Resources
 
 In this appendix, I want to provide some useful links regarding apiconnect v2018, but also Docker and k8s.
 
@@ -855,6 +858,11 @@ In this appendix, I want to provide some useful links regarding apiconnect v2018
 * [How to quickly install Kubernetes on Ubuntu](https://www.techrepublic.com/article/how-to-quickly-install-kubernetes-on-ubuntu/)
 * ... and for children: [The Children's Illustrated Guide to Kubernetes](https://deis.com/blog/2016/kubernetes-illustrated-guide/)
 
+# Appendix B. API Connect versions
+
+This installation guide has been tested OK with the following versions:
+* v2018.2.7
+* v2018.2.10
 
 ---
 <img src="img/containers-footer.jpeg" width="700" height="385">
